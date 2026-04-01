@@ -33,7 +33,7 @@ const panels = Array.from(
 );
 
 if (panels.length) {
-  const randomDelay = () => 2000 + Math.random() * 3000;
+  const randomDelay = () => 3000 + Math.random() * 2000;
   const pickNextImage = (currentSrc, activeImages) => {
     const currentName = currentSrc.split("/").pop();
     const options = filmImages.filter(
