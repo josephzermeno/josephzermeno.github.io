@@ -15,10 +15,7 @@ body {
 }
 
 body {
-  position: relative;
   min-height: 100vh;
-  display: grid;
-  place-items: center;
   background:
     radial-gradient(circle at top, rgba(255, 255, 255, 0.03), transparent 42%),
     linear-gradient(180deg, #11110f 0%, var(--matte-black) 48%, #080807 100%);
@@ -27,61 +24,296 @@ body {
   text-transform: lowercase;
 }
 
-.site-header,
-.site-footer {
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
 .site-header {
-  top: 1.5rem;
-}
-
-.site-footer {
-  bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.75rem 2rem;
 }
 
 .brand {
   margin: 0;
-  color: rgba(244, 241, 234, 0.82);
-  font-size: 0.8rem;
+  color: var(--text);
+  font-size: 1.12rem;
   letter-spacing: 0.28em;
+  text-decoration: none;
 }
 
-.hero {
-  padding: 2rem;
-  text-align: center;
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-h1 {
-  margin: 0;
-  font-size: clamp(2.75rem, 8vw, 5.5rem);
-  font-weight: 500;
-  letter-spacing: 0.18em;
+.nav-link {
+  color: rgba(244, 241, 234, 0.82);
+  font-size: 0.88rem;
+  letter-spacing: 0.22em;
+  text-decoration: none;
+  transition: color 160ms ease;
 }
 
 .instagram-link {
   display: inline-grid;
   place-items: center;
-  width: 2.75rem;
-  height: 2.75rem;
+  width: 2.2rem;
+  height: 2.2rem;
   color: rgba(244, 241, 234, 0.88);
   transition: transform 160ms ease, color 160ms ease;
 }
 
+.brand:hover,
+.brand:focus-visible,
+.nav-link:hover,
+.nav-link:focus-visible,
 .instagram-link:hover,
 .instagram-link:focus-visible {
   color: #ffffff;
-  transform: translateY(-2px);
 }
 
 .instagram-link:focus-visible {
   outline: none;
 }
 
+.instagram-link:hover,
+.instagram-link:focus-visible {
+  transform: translateY(-2px);
+}
+
 .instagram-link svg {
-  width: 1.4rem;
-  height: 1.4rem;
+  width: 1.2rem;
+  height: 1.2rem;
   fill: currentColor;
+}
+
+.page-shell {
+  min-height: calc(100vh - 6rem);
+  padding: 1rem 2rem 3rem;
+}
+
+.page-panel {
+  width: min(100%, 56rem);
+  margin: 0 auto;
+  padding: 4rem 2rem 5rem;
+}
+
+.page-kicker {
+  margin: 0 0 1rem;
+  color: rgba(244, 241, 234, 0.62);
+  font-size: 0.9rem;
+  letter-spacing: 0.22em;
+}
+
+.page-title {
+  margin: 0;
+  font-size: clamp(2.4rem, 6vw, 4.8rem);
+  font-weight: 400;
+  letter-spacing: 0.12em;
+}
+
+.film-grid {
+  width: min(100%, 78rem);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.film-panel {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 1px solid rgba(244, 241, 234, 0.12);
+  background: rgba(255, 255, 255, 0.02);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28);
+}
+
+.film-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.18));
+  pointer-events: none;
+}
+
+.film-panel img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: opacity 600ms ease;
+}
+
+.poems-shell {
+  width: min(100%, 100rem);
+}
+
+.poem-row {
+  display: grid;
+  gap: 1rem;
+}
+
+.poem-name {
+  margin-bottom: 0;
+  padding-left: 3.8rem;
+}
+
+.poem-gallery {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+}
+
+.poem-strip {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(18rem, 24rem);
+  gap: 1.25rem;
+  align-items: start;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding: 0.25rem 0;
+}
+
+.poem-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.poem-image {
+  aspect-ratio: 1086 / 724;
+  min-height: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.poem-image img {
+  object-fit: contain;
+  background: transparent;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  background: rgba(4, 4, 4, 0.96);
+  padding: 2rem;
+}
+
+.lightbox[hidden] {
+  display: none;
+}
+
+.lightbox-image {
+  width: min(95vw, 1086px);
+  max-height: 88vh;
+  object-fit: contain;
+  display: block;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  border: 1px solid rgba(244, 241, 234, 0.2);
+  background: rgba(8, 8, 7, 0.8);
+  color: var(--text);
+  font: inherit;
+  letter-spacing: 0.18em;
+  text-transform: lowercase;
+  padding: 0.7rem 0.9rem;
+  cursor: pointer;
+}
+
+.poem-arrow {
+  width: 2.8rem;
+  height: 5rem;
+  border: 1px solid rgba(244, 241, 234, 0.16);
+  background: rgba(8, 8, 7, 0.82);
+  color: rgba(244, 241, 234, 0.82);
+  font: inherit;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+.poem-arrow:hover,
+.poem-arrow:focus-visible {
+  color: #ffffff;
+  border-color: rgba(244, 241, 234, 0.36);
+  transform: scale(1.02);
+}
+
+.poem-arrow:focus-visible {
+  outline: none;
+}
+
+@media (max-width: 640px) {
+  .site-header {
+    padding: 1.25rem 1rem;
+    gap: 1rem;
+  }
+
+  .brand {
+    font-size: 1rem;
+  }
+
+  .site-nav {
+    gap: 0.7rem;
+  }
+
+  .nav-link {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+  }
+
+  .page-panel {
+    padding: 3rem 1rem 4rem;
+  }
+
+  .page-shell {
+    padding: 0.5rem 1rem 2rem;
+  }
+
+  .film-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .poem-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .poem-strip {
+    grid-auto-columns: 82vw;
+  }
+
+  .poem-arrow {
+    display: none;
+  }
+
+  .poem-name {
+    padding-left: 0;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 980px) {
+  .film-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .film-panel:last-child {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 9;
+  }
+
+  .poem-strip {
+    grid-auto-columns: minmax(16rem, 20rem);
+  }
 }
