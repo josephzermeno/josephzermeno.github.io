@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quantum Circuit Simulator | Joseph Zermeno</title>
+<style>
+  * { margin: 0; padding: 0; }
+  body { background: #0e0e0e; overflow: hidden; }
+  iframe { width: 100%; height: 100vh; border: none; }
+  .fallback {
+    display: none; color: #888; font-family: monospace; text-align: center;
+    padding: 40px 20px; font-size: 14px; line-height: 1.8;
+  }
+  .fallback a { color: #8cba8c; }
+</style>
+</head>
+<body>
+<iframe id="app" src="https://quantumcircuitsimulator.onrender.com" loading="lazy"></iframe>
+<div class="fallback" id="fallback">
+  <p>The simulator is waking up — free-tier services can take 30–60 seconds on first load.</p>
+  <p>If nothing appears, visit the app directly:<br>
+  <a href="https://quantumcircuitsimulator.onrender.com">quantumcircuitsimulator.onrender.com</a></p>
+</div>
+<script>
+  // Show fallback message if iframe fails to load within 10s
+  const t = setTimeout(() => { document.getElementById('fallback').style.display = 'block'; }, 10000);
+  document.getElementById('app').addEventListener('load', () => clearTimeout(t));
+</script>
+</body>
+</html>
