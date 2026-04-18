@@ -107,6 +107,48 @@ poemStrips.forEach((strip) => {
   });
 });
 
+const navDropdowns = Array.from(document.querySelectorAll("[data-nav-dropdown]"));
+
+navDropdowns.forEach((dropdown) => {
+  const toggle = dropdown.querySelector(".nav-dropdown-toggle");
+  const menu = dropdown.querySelector(".nav-dropdown-menu");
+
+  if (!toggle || !menu) {
+    return;
+  }
+
+  const closeMenu = () => {
+    menu.hidden = true;
+    toggle.setAttribute("aria-expanded", "false");
+  };
+
+  const openMenu = () => {
+    menu.hidden = false;
+    toggle.setAttribute("aria-expanded", "true");
+  };
+
+  toggle.addEventListener("click", (event) => {
+    event.stopPropagation();
+    if (menu.hidden) {
+      openMenu();
+    } else {
+      closeMenu();
+    }
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!dropdown.contains(event.target)) {
+      closeMenu();
+    }
+  });
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeMenu();
+    }
+  });
+});
+
 const lightbox = document.querySelector("[data-lightbox]");
 const lightboxImage = lightbox?.querySelector(".lightbox-image");
 const lightboxClose = lightbox?.querySelector(".lightbox-close");
